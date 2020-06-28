@@ -33,7 +33,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[100],
+      backgroundColor: Colors.grey[900],
       body: Column(
         children: <Widget>[
           Expanded(
@@ -49,14 +49,25 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
                   childAspectRatio: MediaQuery.of(context).size.width /
-                      (MediaQuery.of(context).size.height * 0.53 ),
+                      (MediaQuery.of(context).size.height * 0.53),
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  return Button(
+                  if(index == 0 || index == 1){
+                    return Button(
                     buttonText: buttons[index],
-                    color: Colors.deepPurple,
+                    color: Colors.redAccent[400],
                     textColor: Colors.white,
                   );
+                  }
+                  else {
+                    return Button(
+                    buttonText: buttons[index],
+                    color: isOperator(buttons[index])
+                        ? Colors.yellow[700]
+                        : Colors.grey[800],
+                    textColor: Colors.white,
+                  );
+                  }
                 },
               ),
             ),
@@ -64,5 +75,18 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         ],
       ),
     );
+  }
+
+  bool isOperator(String buttonText) {
+    if (buttonText == 'X' ||
+        buttonText == '/' ||
+        buttonText == '-' ||
+        buttonText == '+' ||
+        buttonText == '%' ||
+        buttonText == '=') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

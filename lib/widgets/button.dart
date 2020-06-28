@@ -9,14 +9,14 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {},
       child: Padding(
         padding: EdgeInsets.all(4.0),
         child: Container(
           padding: EdgeInsets.all(8.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(10.0),
             color: color,
           ),
           child: Center(
@@ -24,7 +24,7 @@ class Button extends StatelessWidget {
               buttonText,
               style: TextStyle(
                   color: textColor,
-                  fontSize: 20.0,
+                  fontSize: 25.0,
                   fontWeight: FontWeight.bold),
             ),
           ),

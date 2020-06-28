@@ -41,13 +41,16 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             child: Container(),
           ),
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Container(
               child: GridView.builder(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(0.0),
                 itemCount: buttons.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4),
+                  crossAxisCount: 4,
+                  childAspectRatio: MediaQuery.of(context).size.width /
+                      (MediaQuery.of(context).size.height * 0.53 ),
+                ),
                 itemBuilder: (BuildContext context, int index) {
                   return Button(
                     buttonText: buttons[index],

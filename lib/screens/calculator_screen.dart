@@ -14,23 +14,23 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   final List<String> buttons = [
     'AC',
     'DEL',
-    '%',
-    '/',
+    ' % ',
+    ' / ',
     '9',
     '8',
     '7',
-    'X',
+    ' X ',
     '6',
     '5',
     '4',
-    '-',
+    ' - ',
     '3',
     '2',
     '1',
-    '+',
+    ' + ',
     '0',
     '.',
-    'ANS',
+    'LIGHT',
     '=',
   ];
 
@@ -86,12 +86,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   if (index == 0) {
                     return Button(
-                      buttonTapped: () {
-                        setState(() {
-                          userQuestion = '';
-                          userQuestion = '';
-                        });
-                      },
+                      buttonTapped: _allClearPressed,
                       buttonText: buttons[index],
                       color: Colors.redAccent[400],
                       textColor: Colors.white,
@@ -99,12 +94,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   }
                   if (index == 1) {
                     return Button(
-                      buttonTapped: () {
-                        setState(() {
-                          userQuestion = userQuestion.substring(
-                              0, userQuestion.length - 1);
-                        });
-                      },
+                      buttonTapped: _deleteButtonPressed,
                       buttonText: buttons[index],
                       color: Colors.orangeAccent[400],
                       textColor: Colors.white,
@@ -112,18 +102,31 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   }
                   if (index == buttons.length - 1) {
                     return Button(
-                      buttonTapped: equalPressed,
+                      buttonTapped: _equalPressed,
                       buttonText: buttons[index],
                       color: Colors.orangeAccent[400],
                       textColor: Colors.white,
                     );
-                  } else {
+                  }
+                  if (index == buttons.length - 2) {
                     return Button(
                       buttonTapped: () {
+                        print('theme changer');
                         setState(() {
-                          userQuestion += buttons[index];
+                          if (buttons[index] == 'LIGHT') {
+                            buttons[index] = 'DARK';
+                          }
+                          if (buttons[index] == 'DARK') {}
+                          buttons[index] = 'LIGHT';
                         });
                       },
+                      buttonText: buttons[index],
+                      color: Colors.black87,
+                      textColor: Colors.white,
+                    );
+                  } else {
+                    return Button(
+                      buttonTapped: () => _numberKeyPressed(index),
                       buttonText: buttons[index],
                       color: isOperator(buttons[index])
                           ? Colors.yellow[700]
@@ -141,19 +144,26 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   bool isOperator(String buttonText) {
-    if (buttonText == 'X' ||
-        buttonText == '/' ||
-        buttonText == '-' ||
-        buttonText == '+' ||
-        buttonText == '%' ||
-        buttonText == '=') {
+    if (buttonText == ' X ' ||
+        buttonText == ' / ' ||
+        buttonText == ' - ' ||
+        buttonText == ' + ' ||
+        buttonText == ' % ' ||
+        buttonText == ' = ') {
       return true;
     } else {
       return false;
     }
   }
 
-  equalPressed() {
+  _allClearPressed() {
+    setState(() {
+      userQuestion = '';
+      userQuestion = '';
+    });
+  }
+
+  _equalPressed() {
     String finalQuestion = userQuestion.replaceAll('X', '*');
     ContextModel cm = ContextModel();
     Parser p = Parser();
@@ -163,6 +173,18 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
     setState(() {
       userAnswer = eval.toString();
+    });
+  }
+
+  _deleteButtonPressed() {
+    setState(() {
+      userQuestion = userQuestion.substring(0, userQuestion.length - 1);
+    });
+  }
+
+  _numberKeyPressed(int index) {
+    setState(() {
+      userQuestion += buttons[index];
     });
   }
 }

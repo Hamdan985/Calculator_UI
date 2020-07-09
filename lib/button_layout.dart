@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 
 class ButtonLayout extends StatelessWidget {
   final Function buttonPressed;
-  final Color lightNumberColour = Colors.blue;
-  final Color lightOperatorColour = Colors.black;
-
-  final Color darkNumberColour = Colors.white;
-  final Color darkOperatorColour = Colors.limeAccent;
 
   final Color operatorColor;
   final Color numberColor;

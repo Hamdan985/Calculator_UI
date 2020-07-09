@@ -1,16 +1,33 @@
-# calculatorapp
+# Calculator App
 
-A new Flutter application.
+A simple calculator with basic operators implemented in flutter, with theme a changer.
 
-## Getting Started
+## Demo 
 
-This project is a starting point for a Flutter application.
+![Simple Calculator FLutter - Animated gif demo](CalculatorAppExample.gif)
 
-A few resources to get you started if this is your first Flutter project:
+### Dependencies
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+External packages used to build this project
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+math_expressions: ^2.0.0
+```
+```
+provider: ^4.3.0
+```
+
+### How it Works
+
+This application uses the math_expression package to evaluate the user's mathematical expressions.
+
+The highlight feature is definitely the theme changer implemented completely using Provider. All 
+
+functionalities that include colours is done using the provider package. 
+
+### Design Inspiration
+
+```
+https://cdn.dribbble.com/users/2446175/screenshots/5299391/dribbble_calculator_2x.png
+```
+

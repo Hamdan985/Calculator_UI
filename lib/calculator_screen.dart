@@ -10,7 +10,7 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
-  bool darkThemeEnabled = true;
+  bool darkThemeEnabled = false;
   String questionText = '';
   String answerText = '';
 

@@ -30,7 +30,7 @@ class ThemeChanger with ChangeNotifier {
   Color _questionColor = Color.fromRGBO(67, 84, 188, 1);
 
   Color _numberColor = Colors.black45;
-  Color _operatorColor = Color.fromRGBO(250, 250, 250, 1);
+  Color _operatorColor = Color.fromRGBO(67, 84, 188, 1);
 
   Color _keypadColor = Colors.grey[200];
   Color _backgroundColor = Colors.grey[100];

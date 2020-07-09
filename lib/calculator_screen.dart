@@ -1,6 +1,8 @@
+import 'package:calculatorapp/services/theme_changer.dart';
 import 'package:flutter/material.dart';
 import 'button_layout.dart';
 import 'package:math_expressions/math_expressions.dart';
+import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatefulWidget {
   @override
@@ -8,6 +10,7 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
+  bool darkThemeEnabled = true;
   String questionText = '';
   String answerText = '';
 
@@ -68,27 +71,42 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     }
   }
 
+  changeTheme() {
+    if (darkThemeEnabled) {
+      context.read<ThemeChanger>().lightTheme();
+      darkThemeEnabled = !darkThemeEnabled;
+    } else {
+      context.read<ThemeChanger>().darkTheme();
+      darkThemeEnabled = !darkThemeEnabled;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.watch<ThemeChanger>().backgroundColor,
       body: SafeArea(
           child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          IconButton(
+            alignment: Alignment.center,
+            icon: Icon(Icons.brightness_6),
+            onPressed: changeTheme,
+          ),
           Flexible(
             flex: 3,
             child: Container(
               alignment: Alignment.centerRight,
               padding: EdgeInsets.symmetric(horizontal: 12.0),
-              color: Colors.grey[190],
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text(
                     questionText,
                     style: TextStyle(
                       fontSize: 44.0,
-                      color: Colors.blue,
+                      color: context.watch<ThemeChanger>().questionColor,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -98,7 +116,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       answerText,
                       style: TextStyle(
                         fontSize: 42.0,
-                        color: Colors.grey[500],
+                        color: context.watch<ThemeChanger>().answerColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -110,8 +128,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           Flexible(
             flex: 5,
             child: Container(
-              color: Colors.white70,
-              child: ButtonLayout(buttonPressed: buttonPressed),
+              color: context.watch<ThemeChanger>().keypadColor,
+              child: ButtonLayout(
+                buttonPressed: buttonPressed,
+                numberColor: context.watch<ThemeChanger>().numberColor,
+                operatorColor: context.watch<ThemeChanger>().operatorColor,
+              ),
             ),
           ),
         ],
